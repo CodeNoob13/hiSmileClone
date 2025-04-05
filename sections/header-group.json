@@ -13,9 +13,90 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "text_9girVx": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_Cbr6gd": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_kJjnbV": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_TjtiwE": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_4GtiCE": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_CT8D3c": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_LcH7Ek": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_iDKc4a": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_G7kJey": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_7MEYGT": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        },
+        "text_jYpNYy": {
+          "type": "text",
+          "settings": {
+            "announce_text": "New Club Hismile flavour!"
+          }
+        }
+      },
+      "block_order": [
+        "text_9girVx",
+        "text_Cbr6gd",
+        "text_kJjnbV",
+        "text_TjtiwE",
+        "text_4GtiCE",
+        "text_CT8D3c",
+        "text_LcH7Ek",
+        "text_iDKc4a",
+        "text_G7kJey",
+        "text_7MEYGT",
+        "text_jYpNYy"
+      ],
       "settings": {
-        "background_color": "",
-        "text_color": "",
+        "background_color": "#ec008c",
+        "text_color": "#f3f3f3",
         "announcementbar_url": ""
       }
     },
