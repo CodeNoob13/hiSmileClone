@@ -55,7 +55,7 @@
     <div class="overflow-clip py-3" style="background-color: {{ section.settings.background_color }}">
       <div class="flex gap-12 [animation:var(--animate-marquee)] w-max pl-12 hover:[animation-play-state:paused]">
         {% for block in section.blocks %}
-          <div class="text-[14px]" style="color: {{ section.settings.text_color }}">
+          <div class="text-[14px]" style="color: {{ section.settings.text_color }} ">
             {{ block.settings.announce_text }}
           </div>
         {% endfor %}

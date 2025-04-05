@@ -9,3 +9,7 @@
     }
   }
 }
+
+.mycontainer {
+  @apply max-w-[1280px];
+}

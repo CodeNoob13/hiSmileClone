@@ -1,0 +1,89 @@
+{% schema %}
+{
+  "name": "Hero section",
+  "tag": "div",
+  "class": "hero-section",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "text",
+      "type": "text-block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_text",
+          "label": "Header line",
+          "default": "Pine Lime is here!🍍🍋‍🟩"
+        },
+        {
+          "type": "text",
+          "id": "description_text",
+          "label": "Description",
+          "default": "Every brush bursts with bold, tangy lime and juicy pineapple, giving you the perfect tropical vibes, join the club and turn your brushing routine into a mini holiday with Pine Lime!"
+        },
+        {
+          "type": "url",
+          "id": "button",
+          "label": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Join the club"
+        }
+      ]
+    },
+    {
+      "name": "Image",
+      "type": "image-block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "dekstop_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero section"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["index"]
+  }
+}
+{% endschema %}
+
+<section class="flex mx-auto flex-col-reverse md:flex-row mycontainer md:h-[600px]">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'text-block' %}
+        <div class="flex flex-col justify-center md:w-1/2 items-center text-center md:text-left mb-16 md:mb-0">
+          <div class="md:max-w-[500px] md:mx-auto md:px-5">
+            <h1 class="mb-6 mt-10 md:mt-0 md:mb-10">{{ block.settings.header_text }}</h1>
+            <p class="body--text mb-10 md:mb-14 ">{{ block.settings.description_text }}</p>
+            <button class="btn--primary">
+              {{ block.settings.button_text }}
+            </button>
+          </div>
+        </div>
+
+      {% when 'image-block' %}
+        <div class="w-full md:w-1/2 md:h-full h-[350px]">
+          {{
+            block.settings.dekstop_image
+            | image_url: width: 2000
+            | image_tag: class: 'w-full h-full aspect-square object-cover'
+          }}
+        </div>
+    {% endcase %}
+  {% endfor %}
+</section>

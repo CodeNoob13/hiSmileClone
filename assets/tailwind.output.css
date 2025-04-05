@@ -191,6 +191,21 @@
       max-width: 96rem;
     }
   }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
+  }
+  .mb-16 {
+    margin-bottom: calc(var(--spacing) * 16);
+  }
   .block {
     display: block;
   }
@@ -209,6 +224,18 @@
   .table {
     display: table;
   }
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+  .h-\[350px\] {
+    height: 350px;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .w-full {
+    width: 100%;
+  }
   .w-max {
     width: max-content;
   }
@@ -221,8 +248,20 @@
   .resize {
     resize: both;
   }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-col-reverse {
+    flex-direction: column-reverse;
+  }
   .flex-wrap {
     flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-center {
+    justify-content: center;
   }
   .gap-12 {
     gap: calc(var(--spacing) * 12);
@@ -238,26 +277,17 @@
   .overflow-hidden {
     overflow: hidden;
   }
-  .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
-  }
-  .py-2 {
-    padding-block: calc(var(--spacing) * 2);
+  .object-cover {
+    object-fit: cover;
   }
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
-  .pr-14 {
-    padding-right: calc(var(--spacing) * 14);
-  }
   .pl-12 {
     padding-left: calc(var(--spacing) * 12);
   }
-  .pl-14 {
-    padding-left: calc(var(--spacing) * 14);
-  }
-  .pl-24 {
-    padding-left: calc(var(--spacing) * 24);
+  .text-center {
+    text-align: center;
   }
   .text-\[14px\] {
     font-size: 14px;
@@ -298,6 +328,69 @@
       }
     }
   }
+  .md\:mx-auto {
+    @media (width >= 48rem) {
+      margin-inline: auto;
+    }
+  }
+  .md\:mt-0 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:mb-0 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:mb-10 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing) * 10);
+    }
+  }
+  .md\:mb-14 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing) * 14);
+    }
+  }
+  .md\:h-\[600px\] {
+    @media (width >= 48rem) {
+      height: 600px;
+    }
+  }
+  .md\:h-full {
+    @media (width >= 48rem) {
+      height: 100%;
+    }
+  }
+  .md\:w-1\/2 {
+    @media (width >= 48rem) {
+      width: calc(1/2 * 100%);
+    }
+  }
+  .md\:max-w-\[500px\] {
+    @media (width >= 48rem) {
+      max-width: 500px;
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
+  .md\:px-5 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 5);
+    }
+  }
+  .md\:text-left {
+    @media (width >= 48rem) {
+      text-align: left;
+    }
+  }
+}
+.mycontainer {
+  max-width: 1280px;
 }
 @property --tw-rotate-x {
   syntax: "*";
