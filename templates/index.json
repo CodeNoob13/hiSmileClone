@@ -34,6 +34,15 @@
       ],
       "settings": {}
     },
+    "product_slider_33BA6i": {
+      "type": "product-slider",
+      "settings": {
+        "section_title": "Shop our best sellers",
+        "section_description": "Explore our range of fan-favourites",
+        "section_button": "Shop all",
+        "collection_list": "frontpage"
+      }
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -201,6 +210,7 @@
   },
   "order": [
     "hero_section_YQTVX7",
+    "product_slider_33BA6i",
     "rich_text",
     "featured_collection",
     "collage",
