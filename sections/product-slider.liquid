@@ -41,41 +41,73 @@
 {% if section.settings.collection_list %}
   {% assign collection = section.settings.collection_list %}
 
-  <div class="flex max-w-[1440px] mx-auto pt-[1.5rem] mb-[128px]">
-    <div class="flex flex-col">
-      <h2 class="mb-8 text-[32px]">{{ section.settings.section_title }}</h2>
-      <p class="body--text max-w-[148px] pb-8">{{ section.settings.section_description }}</p>
+  <div class="flex flex-col lg:flex-row max-w-[1440px] mx-auto pt-[1.5rem] mb-[128px] px-5">
+    <div class="flex lg:flex-col flex-row">
+      <div>
+        <h2 class="mb-8 text-[32px]">{{ section.settings.section_title }}</h2>
+        <p class="body--text max-w-[148px] pb-8">{{ section.settings.section_description }}</p>
+      </div>
       {% render 'secondary--button', text: section.settings.section_button %}
     </div>
 
     <div
-      class="flex overflow-x-auto relative gap-6"
+      class="flex overflow-x-auto gap-4"
     >
       {% for product in collection.products %}
-        <div class="flex flex-col items-center bg-white min-w-[300px]">
-          <img
-            src="{{ product.featured_image | image_url }}"
-            width="300px"
-            height="300px"
-            class="object-contain bg-[#F2F2F7] mb-[2.5rem] rounded-t-xl aspect-square"
-          >
-          {% comment %}
-            {{
-              | image_url: width: 300, height: 300
-              | image_tag: class: 'object-cover bg-[#F2F2F7] mb-[1.5rem] rounded-t-xl'
-            }}
-          {% endcomment %}
+        <a href="{{ product.url }}">
+          <div class="flex flex-col items-center bg-white min-w-[300px]">
+            <div>
+              <div class="relative h-full mb-[2.5rem]">
+                <img
+                  src="{{ product.featured_image | image_url }}"
+                  width="300px"
+                  height="300px"
+                  class="object-contain bg-[#F2F2F7] rounded-t-xl aspect-square"
+                >
 
-          <div class="flex flex-col justify-end text-center w-full px-6 flex-[1_0_auto] mb-[1.5rem] pb-3 border-b-xl">
-            <span class="text-[1.65rem]">{{ product.title }}</span>
-            <div class="flex text-[#EB008C] items-baseline justify-center gap-2 mb-8">
-              <span class="uppercase tracking-tight">eu</span
-              ><span class="text-[2.5rem]">{{ product.price_min | money_without_trailing_zeros }}</span>
+                {% if product.variants.size > 1 %}
+                  <div
+                    class="absolute top-0 bottom-0 bg-[rgba(229,229,234,0.6)] left-0 w-[20%] z-1 rounded-tl-2xl flex"
+                    aria-hidden="true"
+                  >
+                    <!-- ABSOLUTE -->
+                    <div
+                      class="flex flex-col gap-6 justify-center mx-auto"
+                    >
+                      {% for variant in product.variants limit: 4 %}
+                        <img
+                          src="{{variant.image | image_url }}"
+                          width="35px"
+                          height="35px"
+                          alt="{{ variant.image.alt }}"
+                          class="object-cover aspect-square rounded"
+                        >
+                      {% endfor %}
+
+                      <div class="flex justify-center bg-white rounded items-center aspect-square">
+                        +{{ product.variants.size | minus: 5 }}
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
             </div>
-            <a class="btn--primary"> Add to cart </a>
+
+            <div class="flex flex-col justify-end text-center w-full px-6 flex-[1_0_auto] mb-[1.5rem] pb-3 border-b-xl">
+              <span class="text-[1.65rem]">{{ product.title }}</span>
+              <div class="flex text-[#EB008C] items-baseline justify-center gap-2 mb-8">
+                <span class="uppercase tracking-tight">eu</span
+                ><span class="text-[2.5rem]">{{ product.price_min | money_without_trailing_zeros }}</span>
+              </div>
+              <a class="btn--primary"> Add to cart </a>
+            </div>
           </div>
-        </div>
+        </a>
       {% endfor %}
     </div>
   </div>
 {% endif %}
+
+<script>
+  console.log(Alpine.version);
+</script>

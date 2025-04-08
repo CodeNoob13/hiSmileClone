@@ -308,7 +308,7 @@ h1,
 
 h2,
 .h2 {
-  font-size: 32px;
+  font-size: 24px;
 }
 
 @media only screen and (min-width: 750px) {
@@ -877,7 +877,7 @@ summary::-webkit-details-marker {
 }
 
 /* component-grid */
-/* .grid {
+.grid {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 2rem;
@@ -885,7 +885,7 @@ summary::-webkit-details-marker {
   list-style: none;
   column-gap: var(--grid-mobile-horizontal-spacing);
   row-gap: var(--grid-mobile-vertical-spacing);
-} */
+}
 
 @media screen and (min-width: 750px) {
   .grid {
@@ -3618,7 +3618,7 @@ details-disclosure > details {
 }
 
 .btn--secondary {
-  max-width: 60%;
+  max-width: 90%;
   color: #636366;
   height: 50px;
   padding-left: 25px;
@@ -3632,6 +3632,13 @@ details-disclosure > details {
   align-items: center;
   border: 0.5px solid #636366;
   font-weight: 500;
+}
+
+@media screen and (max-width: 1024px) {
+  .btn--secondary {
+    margin-left: auto;
+    max-width: 30%;
+  }
 }
 
 .btn--secondary :hover {
