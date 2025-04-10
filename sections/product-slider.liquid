@@ -41,7 +41,9 @@
 {% if section.settings.collection_list %}
   {% assign collection = section.settings.collection_list %}
 
-  <div class="flex flex-col lg:flex-row max-w-[1440px] mx-auto pt-[1.5rem] mb-[128px] px-5">
+  <div
+    class="flex flex-col lg:flex-row max-w-[1440px] mx-auto pt-[1.5rem] mb-[128px] px-5"
+  >
     <div class="flex lg:flex-col flex-row">
       <div>
         <h2 class="mb-8 text-[32px]">{{ section.settings.section_title }}</h2>
@@ -54,60 +56,67 @@
       class="flex overflow-x-auto gap-4"
     >
       {% for product in collection.products %}
-        <a href="{{ product.url }}">
-          <div class="flex flex-col items-center bg-white min-w-[300px]">
-            <div>
-              <div class="relative h-full mb-[2.5rem]">
+        <div
+          x-data="{selectedVariantImg: '{{ product.featured_image | image_url }}'}"
+          class="bg-white flex flex-col items-center min-w-[300px]"
+        >
+          <div class="relative mb-[2.5rem]">
+            <div class="h-full">
+              <a href="{{ product.url }}">
                 <img
-                  src="{{ product.featured_image | image_url }}"
+                  :src="selectedVariantImg"
                   width="300px"
                   height="300px"
+
                   class="object-contain bg-[#F2F2F7] rounded-t-xl aspect-square"
                 >
+              </a>
 
-                {% if product.variants.size > 1 %}
+              {% if product.variants.size > 1 %}
+                <div
+                  class="absolute top-0 bottom-0 bg-[rgba(229,229,234,0.6)] left-0 w-[20%] z-1 rounded-tl-2xl flex"
+                  aria-hidden="true"
+                >
+                  <!-- ABSOLUTE -->
                   <div
-                    class="absolute top-0 bottom-0 bg-[rgba(229,229,234,0.6)] left-0 w-[20%] z-1 rounded-tl-2xl flex"
-                    aria-hidden="true"
+                    class="flex flex-col gap-6 justify-center mx-auto"
+                    x-data="{selectedVariant: null, selectedVariantIndex: null,}"
                   >
-                    <!-- ABSOLUTE -->
-                    <div
-                      class="flex flex-col gap-6 justify-center mx-auto"
-                    >
-                      {% for variant in product.variants limit: 4 %}
-                        <img
-                          src="{{variant.image | image_url }}"
-                          width="35px"
-                          height="35px"
-                          alt="{{ variant.image.alt }}"
-                          class="object-cover aspect-square rounded"
-                        >
-                      {% endfor %}
+                    {% for variant in product.variants limit: 4 %}
+                      <img
+                        @click="selectedVariantIndex = {{ forloop.index0 }}; selectedVariantImg = '{{ variant.featured_image | image_url }}'"
+                        :class="selectedVariantIndex == {{ forloop.index0 }} ? 'outline outline-black' : '' "
+                        src="{{variant.image | image_url }}"
+                        width="35px"
+                        height="35px"
+                        alt="{{ variant.image.alt }}"
+                        class="object-cover aspect-square rounded cursor-pointer"
+                      >
+                    {% endfor %}
 
-                      <div class="flex justify-center bg-white rounded items-center aspect-square">
+                    <a href="{{ product.url }}">
+                      <div
+                        class="flex justify-center bg-white rounded items-center aspect-square cursor-pointer"
+                      >
                         +{{ product.variants.size | minus: 5 }}
                       </div>
-                    </div>
+                    </a>
                   </div>
-                {% endif %}
-              </div>
-            </div>
-
-            <div class="flex flex-col justify-end text-center w-full px-6 flex-[1_0_auto] mb-[1.5rem] pb-3 border-b-xl">
-              <span class="text-[1.65rem]">{{ product.title }}</span>
-              <div class="flex text-[#EB008C] items-baseline justify-center gap-2 mb-8">
-                <span class="uppercase tracking-tight">eu</span
-                ><span class="text-[2.5rem]">{{ product.price_min | money_without_trailing_zeros }}</span>
-              </div>
-              <a class="btn--primary"> Add to cart </a>
+                </div>
+              {% endif %}
             </div>
           </div>
-        </a>
+
+          <div class="flex flex-col justify-end text-center w-full px-6 mb-[1.5rem] pb-3 border-b-xl flex-[1_0_auto]">
+            <span class="text-[1.65rem]">{{ product.title }}</span>
+            <div class="flex text-[#EB008C] items-baseline justify-center gap-2 mb-8">
+              <span class="uppercase tracking-tight">eu</span
+              ><span class="text-[2.5rem]">{{ product.price_min | money_without_trailing_zeros }}</span>
+            </div>
+            <a class="btn--primary"> Add to cart </a>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>
 {% endif %}
-
-<script>
-  console.log(Alpine.version);
-</script>

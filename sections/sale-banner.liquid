@@ -1,0 +1,52 @@
+{% schema %}
+{
+  "name": "Sale banner",
+  "tag": "section",
+  "class": "sale-banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop our bundles"
+    },
+    {
+      "type": "text",
+      "id": "url_link",
+      "label": "Link ",
+      "default": "Shop now"
+    },
+    {
+      "type": "text",
+      "id": "url_text",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background Color",
+      "default": "#EC008D"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sales banner"
+    }
+  ]
+}
+{% endschema %}
+
+<div
+  class="py-[64px] flex justify-center items-center mb-[4rem] gap-2"
+  style="background-color:{{ section.settings.background }} flex-col"
+>
+  <h2>{{ section.settings.title }}</h2>
+  <a class="underline" href="{{ section.settings.url_link }}"> {{ section.settings.url_text }}</a>
+</div>
