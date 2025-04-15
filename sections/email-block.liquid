@@ -1,0 +1,47 @@
+{% schema %}
+{
+  "name": "Newsletter block",
+  "tag": "section",
+  "class": "newsletter-block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Want the chance to trial our new products?"
+    },
+    {
+      "type": "text",
+      "id": "section_description",
+      "label": "Description",
+      "default": "Sign up for the latest news, exclusive offers, and the chance to trial new and unreleased products."
+    },
+    {
+      "type": "text",
+      "id": "form_text",
+      "label": "Form placeholder",
+      "default": "Please enter your email"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter block"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="flex flex-col md:flex-row md:justify-between px-6 py-16 md:p-10 md:max-w-1248px bg-[#1C1C1E] text-white gap-6 mt-[64px]">
+  <h2 class="!text-white ">{{ section.settings.section_title }}</h2>
+  <p class="">{{ section.settings.section_description }}</p>
+  <div>
+    <input
+      type="email"
+      placeholder="{{ section.settings.form_text }}"
+      pattern=".+@example\.com"
+      maxlength="20"
+      required
+      class="w-full bg-white text-black h-24 p-6 rounded-md"
+    >
+  </div>
+</div>

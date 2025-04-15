@@ -49,14 +49,37 @@
         "title": "Shop our bundles",
         "url_link": "Shop now",
         "url_text": "Shop now",
-        "text_color": "#fff",
-        "background": "#EC008D"
+        "text_color": "#ffffff",
+        "background": "#ec008d"
+      }
+    },
+    "showcase_component_pPUYpU": {
+      "type": "showcase-component",
+      "settings": {
+        "badge": "Stock up & Save",
+        "title": "Build your dream toothpaste collection",
+        "url_text": "Shop now",
+        "description": "The more you buy, the more you save, the more exclusives you unlock.",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "background_image": "shopify://shop_images/3for20showcase_-_d_2520x_8c68636a-d834-45ba-9564-8865d94f5631.webp"
+      }
+    },
+    "email_block_QmDeEc": {
+      "type": "email-block",
+      "name": "Newsletter block",
+      "settings": {
+        "section_title": "Want the chance to trial our new products?",
+        "section_description": "Sign up for the latest news, exclusive offers, and the chance to trial new and unreleased products.",
+        "form_text": "Please enter your email"
       }
     }
   },
   "order": [
     "hero_section_YQTVX7",
     "product_slider_33BA6i",
-    "sale_banner_wEbp6V"
+    "sale_banner_wEbp6V",
+    "showcase_component_pPUYpU",
+    "email_block_QmDeEc"
   ]
 }

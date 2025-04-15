@@ -1,20 +1,20 @@
 {% schema %}
 {
-  "name": "Sale banner",
+  "name": "Showcase Component",
   "tag": "section",
-  "class": "sale-banner",
+  "class": "showcase-component",
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Shop our bundles"
+      "id": "badge",
+      "label": "Badge text",
+      "default": "Stock up & Save"
     },
     {
       "type": "text",
-      "id": "url_link",
-      "label": "Link ",
-      "default": "Shop now"
+      "id": "title",
+      "label": "title",
+      "default": "Build your dream toothpaste collection"
     },
     {
       "type": "text",
@@ -23,16 +23,26 @@
       "default": "Shop now"
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#fff"
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "The more you buy, the more you save, the more exclusives you unlock."
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background Color",
-      "default": "#EC008D"
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "label": "Background image",
+      "id": "background_image"
     }
   ],
   "presets": [
@@ -44,9 +54,20 @@
 {% endschema %}
 
 <div
-  class="py-[64px] flex justify-center items-center mb-[4rem] gap-2 flex-col"
-  style="background-color:{{ section.settings.background }}; color:{{ section.settings.text_color }}"
+  class="flex items-start h-[520px] sm:h-[740px] xl:max-w-[1440px] px-5 pt-8 bg-cover bg-no-repeat bg-center md:bg-center mx-auto rounded-2xl mt-[120px]"
+  style="background-image: url({{section.settings.background_image | image_url }})"
 >
-  <div class="text-[2.5rem]">{{ section.settings.title }}</div>
-  <a class="underline" href="{{ section.settings.url_link }}"> {{ section.settings.url_text }}</a>
+  <div class="max-w-[390px] flex flex-col gap-6 px-12 py-7">
+    <span class="py-2 px-6 max-w-fit bg-[#ec008d] text-white border-[0.5px] border-black rounded-[1rem]">
+      {{- section.settings.badge -}}
+    </span>
+    <div class="text-[3.25rem] leading-18 font-medium">{{ section.settings.title }}</div>
+    <p>{{ section.settings.description }}</p>
+    <a
+      class="h-[52px] flex justify-center items-center cursor-pointer px-[50px] bg-white max-w-fit font-medium rounded-full mt-8"
+      src="{{ section.settings.button_link }}"
+    >
+      {{ section.settings.button_text }}
+    </a>
+  </div>
 </div>

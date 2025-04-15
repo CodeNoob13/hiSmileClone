@@ -57,7 +57,7 @@
     >
       {% for product in collection.products %}
         <div
-          x-data="{selectedVariantImg: '{{ product.featured_image | image_url }}'}"
+          x-data="{selectedVariantImg: '{{ product.featured_image | image_url }}', currentVariantId: '{{ product.selected_or_first_available_variant.id }}'}"
           class="bg-white flex flex-col items-center min-w-[300px]"
         >
           <div class="relative mb-[2.5rem]">
@@ -84,7 +84,7 @@
                   >
                     {% for variant in product.variants limit: 4 %}
                       <img
-                        @click="selectedVariantIndex = {{ forloop.index0 }}; selectedVariantImg = '{{ variant.featured_image | image_url }}'"
+                        @click="selectedVariantIndex = {{ forloop.index0 }}; selectedVariantImg = '{{ variant.featured_image | image_url }}'; currentVariantId = {{ variant.id }};"
                         :class="selectedVariantIndex == {{ forloop.index0 }} ? 'outline outline-black' : '' "
                         src="{{variant.image | image_url }}"
                         width="35px"
@@ -98,7 +98,7 @@
                       <div
                         class="flex justify-center bg-white rounded items-center aspect-square cursor-pointer"
                       >
-                        +{{ product.variants.size | minus: 5 }}
+                        +{{ product.variants.size | minus: 4 }}
                       </div>
                     </a>
                   </div>
@@ -107,16 +107,54 @@
             </div>
           </div>
 
-          <div class="flex flex-col justify-end text-center w-full px-6 mb-[1.5rem] pb-3 border-b-xl flex-[1_0_auto]">
+          <div
+            class="flex flex-col justify-end text-center w-full px-6 mb-[1.5rem] pb-3 border-b-xl flex-[1_0_auto]"
+          >
             <span class="text-[1.65rem]">{{ product.title }}</span>
             <div class="flex text-[#EB008C] items-baseline justify-center gap-2 mb-8">
               <span class="uppercase tracking-tight">eu</span
               ><span class="text-[2.5rem]">{{ product.price_min | money_without_trailing_zeros }}</span>
             </div>
-            <a class="btn--primary"> Add to cart </a>
+            <button
+              class="adc btn--primary"
+              x-data
+              @click="$store.data.addToCart(currentVariantId)"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       {% endfor %}
     </div>
   </div>
 {% endif %}
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('data', {
+      addToCart(id) {
+        let formData = {
+          id: id,
+          quantity: 1,
+        };
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then(() => {
+            // after submitting, redirect to cart
+            window.location.href = '/cart';
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      },
+    });
+  });
+</script>
