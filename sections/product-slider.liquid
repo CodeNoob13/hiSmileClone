@@ -57,7 +57,7 @@
     >
       {% for product in collection.products %}
         <div
-          x-data="{selectedVariantImg: '{{ product.featured_image | image_url }}', currentVariantId: '{{ product.selected_or_first_available_variant.id }}'}"
+          x-data="{selectedVariantImg: '{{ product.featured_image | image_url }}', currentVariantId: '{{ product.selected_or_first_available_variant.id }}', inStock: $store.data.variantInventory[{{ product.selected_or_first_available_variant.id }}] > 0 }"
           class="bg-white flex flex-col items-center min-w-[300px]"
         >
           <div class="relative mb-[2.5rem]">
@@ -84,7 +84,9 @@
                   >
                     {% for variant in product.variants limit: 4 %}
                       <img
-                        @click="selectedVariantIndex = {{ forloop.index0 }}; selectedVariantImg = '{{ variant.featured_image | image_url }}'; currentVariantId = {{ variant.id }};"
+                        @click="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     selectedVariantIndex = {{ forloop.index0 }}; selectedVariantImg = '{{ variant.featured_image | image_url }}'; currentVariantId = {{ variant.id }}; $store.data.checkInventory && $store.data.checkInventory(currentVariantId); inStock = $store.data.variantInventory[currentVariantId] > 0;console.log(inStock);
+                        "
                         :class="selectedVariantIndex == {{ forloop.index0 }} ? 'outline outline-black' : '' "
                         src="{{variant.image | image_url }}"
                         width="35px"
@@ -117,8 +119,9 @@
             </div>
             <button
               class="adc btn--primary"
-              x-data
               @click="$store.data.addToCart(currentVariantId)"
+              :disabled="!inStock"
+              :class="inStock ? 'text-red-400' : 'text-red-50'"
             >
               Add to cart
             </button>
@@ -130,31 +133,52 @@
 {% endif %}
 
 <script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.store('data', {
-      addToCart(id) {
-        let formData = {
-          id: id,
-          quantity: 1,
-        };
-        fetch(window.Shopify.routes.root + 'cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      document.addEventListener('alpine:init', () => {
+        Alpine.store('data', {
+
+
+  variantInventory: {
+    {% for product in collection.products %}
+      {% for variant in product.variants %}
+        '{{ variant.id }}': {{ variant.inventory_quantity }},
+        {% endfor %}
+      {% endfor %}
+    },
+
+
+    checkInventory(id) {
+      quantity = this.variantInventory[id];
+
+      console.log(quantity);
+    },
+
+
+
+
+
+          addToCart(id) {
+            let formData = {
+              id: id,
+              quantity: 1,
+            };
+            fetch(window.Shopify.routes.root + 'cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then(() => {
+                // after submitting, redirect to cart
+                window.location.href = '/cart';
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
           },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => {
-            return response.json();
-          })
-          .then(() => {
-            // after submitting, redirect to cart
-            window.location.href = '/cart';
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      },
-    });
-  });
+        });
+      });
 </script>
